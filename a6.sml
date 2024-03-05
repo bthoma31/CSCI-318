@@ -14,7 +14,7 @@ exception NegativeValue
 
 fun printValue(inv: investment)=
     case inv of 
-        Stock(symb,price,shares)=> if price*shares <0
+        Stock(symb,price,shares)=> if price*shares < 0
                                     then raise NegativeValue
                                     else print(Int.toString(price*shares)) | Cash(amt)=> print ("Cash = " ^ Int.toString(amt))
                             
@@ -30,17 +30,34 @@ fun compareValue(inv1:investment,inv2:investment)=
     
 fun findMaxValue(investments)=
     case investments of 
-        inv ::[] => inv | inv ::rest => let 
+        inv ::[] => inv | inv ::rest =>let 
                                         val max_rest=findMaxValue(rest)
-                                      in
-                                        if compareValue(inv,max_rest)
-                                        then inv
-                                        else max_rest
-                                      end
+                                        in
+                                            if compareValue(inv,max_rest)
+                                            then inv
+                                            else max_rest
+                                        end
 val googleStock=Stock("GOO",70,15);
 val face=Stock("fb",20,8);
 val ibm=Stock("iBM",30,10);
 
 val investmentList=[myCash,appleStock,googleStock,face,ibm];
 val ans5=findMaxValue(investmentList);
+
+fun findMaxValue2(invvestments)=
+    let fun compareValue2(inv1,inv2)=
+        valueOf(inv1)>valueOf(inv2)
+    in
+        case investments of
+            inv :: [] inv | inv::rest => let
+                                            val max_rest=findMaxValue(rest)
+                                         in  
+                                            if compareValue(inv, max_rest)
+                                            then inv
+                                            else max_rest
+                                         end
+    end
+
+val an6=findMaxValue2(investmentList);
+
 
