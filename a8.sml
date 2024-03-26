@@ -115,12 +115,12 @@ val ans3 = greater_than_1000 investments
 (*
  * 5. Complete the definition of less_than_20 to use filter to return a list of stocks with less than 20 shares
  *)
-fun numOfShares investment=
+fun sharesOf investment=
     case investment of
        (symbol, price, shares) => shares
 
 fun less_than_20 investments =
-    filter(fn x => (numOfShares x) < 20 ) investments
+    filter(fn x => (sharesOf x) < 20 ) investments
 
 
 val ans4 = less_than_20 investments
